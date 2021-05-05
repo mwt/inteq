@@ -10,21 +10,25 @@ This package provides the function `SolveVolterra` which approximates the soluti
 
 ![f(s) = \int_0^s K(s,y) g(y) dy](assets/volterra-equation.svg)
 
-Parameters
-----------
-`k` : `function`
-    The kernel function that takes two arguments.
-`f` : `function`
-    The left hand side function that takes one argument.
-`b` : `float`
-    Upper bound of the estimate, defaults to 1.
-`num` : `int`
-    Number of estimation points between zero and `b`.
+### Parameters
 
-Returns
--------
-`grid` : `2-D array`
+```
+k : function
+    The kernel function that takes two arguments.
+f : function
+    The left hand side function that takes one argument.
+b : float
+    Upper bound of the estimate, defaults to 1.
+num : int
+    Number of estimation points between zero and `b`.
+```
+
+### Returns
+
+```
+grid : 2-D array
     Input values are in the first row and output values are in the second row.
+```
 
 ## Fredholm
 
