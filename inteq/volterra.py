@@ -43,7 +43,7 @@ def solve(
     # create a lower triangular matrix of kernel values
     ktril = numpy.tril(k(sgrid[:, numpy.newaxis], sgrid))
     # find the gvalues (/num) by solving the system of equations
-    ggrid = scipy.linalg.solve_triangular(ktril, f(sgrid), lower=True)
+    ggrid = scipy.linalg.solve_triangular(ktril, f(sgrid), lower=True, check_finite=False)
     # combine the s grid and the g grid
     return numpy.array([sgrid, (ggrid * num)])
 
