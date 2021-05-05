@@ -20,8 +20,6 @@ def solve(
     f(s) = \\int_0^s K(s,y) g(y) dy
     $$
 
-    Returns a dictionary of 
-
     Parameters
     ----------
     k : function
