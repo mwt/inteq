@@ -25,7 +25,7 @@ def solve(
     k : function
         The kernel function that takes two arguments.
     f : function 
-        The left hand side function that takes one argument.
+        The left hand side (free) function that takes one argument.
     b : float
         Upper bound of the estimate, defaults to 1.
     num : int
