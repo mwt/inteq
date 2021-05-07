@@ -36,7 +36,7 @@ grid : 2-D array
 
 This package provides the function `SolveFredholm` which approximates the solution, g(x), to the Fredholm Integral Equation of the first kind:
 
-![f(s) = \int_0^b K(s,y) g(y) dy](https://raw.githubusercontent.com/mwt/inteq/main/assets/fredholm-equation.svg)
+![f(s) = \int_a^b K(s,y) g(y) dy](https://raw.githubusercontent.com/mwt/inteq/main/assets/fredholm-equation.svg)
 
 using the method described in [Twomey (1963)](https://doi.org/10.1145/321150.321157). It will return a smooth curve that is an approximate solution. However, it may not be a good approximate to the true solution.
 
