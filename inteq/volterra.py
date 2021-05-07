@@ -20,6 +20,8 @@ def solve(
     f(s) = \\int_0^s K(s,y) g(y) dy
     $$
 
+    using the method in Betto and Thomas (2021).
+
     Parameters
     ----------
     k : function

@@ -49,7 +49,7 @@ def solve(
     f(s) = \\int_0^b K(s,y) g(y) dy
     $$
 
-    This may fail if the solution is not unique.
+    using the method described in Twomey (1963). It will return a smooth curve that is an approximate solution. However, it may not be a good approximate to the true solution.
 
     Parameters
     ----------
@@ -88,7 +88,7 @@ def solve(
     else:
         AAgH = ksqur.T @ ksqur
     # find the gvalues (/num) by solving the system of equations
-    ggrid = numpy.linalg.solve(AAgH, ksqur.T @ f(sgrid) )
+    ggrid = numpy.linalg.solve(AAgH, ksqur.T @ f(sgrid))
     # combine the s grid and the g grid
     return numpy.array([ygrid, ggrid])
 
