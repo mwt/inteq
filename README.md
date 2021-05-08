@@ -8,7 +8,7 @@ This package estimates Volterra and Fredholm integral equations.
 
 This package provides the function `SolveVolterra` which approximates the solution, g(x), to the Volterra Integral Equation of the first kind:
 
-![f(s) = \int_0^s K(s,y) g(y) dy](https://raw.githubusercontent.com/mwt/inteq/main/assets/volterra-equation.svg)
+![f(s) = \int_a^s K(s,y) g(y) dy](https://raw.githubusercontent.com/mwt/inteq/main/assets/volterra-equation.svg)
 
 using the method in [Betto and Thomas (2021)](https://mattwthomas.com/papers/asymmetric-all-pay-contests-with-spillovers/).
 
@@ -17,8 +17,10 @@ using the method in [Betto and Thomas (2021)](https://mattwthomas.com/papers/asy
 ```
 k : function
     The kernel function that takes two arguments.
-f : function
-    The left hand side (free) function that takes one argument.
+f : function 
+    The left hand side (free) function with f(a) = 0.
+a : float
+    Lower bound of the integral, defaults to 0.
 b : float
     Upper bound of the estimate, defaults to 1.
 num : int
