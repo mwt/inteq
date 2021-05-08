@@ -78,4 +78,4 @@ Thus, the trapezoid rule typically performs better. However, the trapezoid rule 
 
 ![example of trapezoid rule having issues](https://raw.githubusercontent.com/mwt/inteq/main/assets/trap-vs-mid2.svg)
 
-This can be remedied by smoothing the function.
+This can be remedied by smoothing the function. For example, with `inteq.helpers.smooth()`.
