@@ -13,9 +13,10 @@ def k(s, t):
 def trueg(s):
     return (2 + s ** 2) / 2
 
+
 # looks pretty good with just 8 grid points
 # but we'll use 25
-s, g = SolveVolterra(k, num=25)
+s, g = SolveVolterra(k, num=25, method="trapezoid")
 
 # plot functions
 figure = plt.figure()

@@ -1,6 +1,6 @@
 import numpy
 
-
+#%%
 def makeH(dim: int) -> numpy.ndarray:
     """
     Make H matrix for estimating Fredholm equations as in (Twomey 1963).
@@ -26,7 +26,30 @@ def makeH(dim: int) -> numpy.ndarray:
     return Hmat
 
 
-def smooth(v):
+#%%
+def simpson(dim: int) -> numpy.ndarray:
+    """
+    Make H matrix for estimating Fredholm equations as in (Twomey 1963).
+
+    Parameters
+    ----------
+    dim : int
+        The dimension of the H matrix.
+
+    Returns
+    -------
+    weights : 1-D array
+        The quadrature weights according to Simpson's rule.
+    """
+    if dim > 2 and (dim % 2) == 1:
+        tiles = numpy.tile([4, 2], dim // 2)
+        return numpy.concatenate(([1], tiles[0 : dim - 2], [1])) / 3
+    else:
+        raise ValueError("Simpson's rule requires an odd number of endpoints")
+
+
+#%%
+def smooth(v: numpy.ndarray) -> numpy.ndarray:
     """
     Smooth a vector that is oscillating.
 
@@ -45,3 +68,4 @@ def smooth(v):
         numpy.concatenate(([1], numpy.repeat(0.5, dim - 1)))
     ) + numpy.diag(numpy.repeat(0.5, dim - 1), -1)
     return smat @ v
+

@@ -1,23 +1,26 @@
 # -*- coding: utf-8 -*-
 
 from inteq import SolveFredholm
+import numpy as np
 import matplotlib.pyplot as plt
 
 # define kernel
 def k(s, t):
-    return s * t
+    return 1 + np.cos(np.pi * (t - s) / 3)
 
 
 def f(s):
-    return s
+    sa = np.abs(s)
+    p3 = -np.pi / 3
+    return (6 + sa) * (1 + 0.5 * np.cos(s * p3)) - (9 / (2 * np.pi)) * np.sin(sa * p3)
 
 
 # true value
 def trueg(s):
-    return s
+    return k(0, s)
 
 
-s, g = SolveFredholm(k, f, a=0, b=1, num=60, gamma=1e-10)
+s, g = SolveFredholm(k, f, a=-3, b=3, num=1000, gamma=1)
 
 # plot functions
 figure = plt.figure()

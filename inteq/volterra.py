@@ -66,7 +66,7 @@ def solve(
         ktril, f(sgrid), lower=True, check_finite=False
     )
     # combine the s grid and the g grid
-    return numpy.array([sgrid, (ggrid * num)])
+    return numpy.array([sgrid, (ggrid * num / (b - a))])
 
 
 # %%

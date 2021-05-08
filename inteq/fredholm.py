@@ -2,7 +2,7 @@
 
 import typing
 import numpy
-from .helpers import makeH
+from .helpers import makeH, simpson
 
 #%%
 
@@ -44,16 +44,15 @@ def solve(
     """
     if not isinstance(num, int):
         num = int(num)
+    # need num to be odd to apply Simpson's rule
+    if (num % 2) == 0:
+        num += 1
     # get grid for s
     sgrid = numpy.linspace(a, b, num)
-    # get quadrature points and weights
-    ygrid, weights = numpy.polynomial.legendre.leggauss(num)
-    # change of variables to [-1,1]
-    if (a != -1) or (b != 1):
-        ygrid = ((b - a) / 2) * ygrid + ((a + b) / 2)
-        weights = ((b - a) / 2) * weights
+    # get quadrature weights
+    weights = simpson(num)
     # create the quadrature matrix
-    ksqur = weights * k(sgrid[:, numpy.newaxis], ygrid)
+    ksqur = weights * k(sgrid[:, numpy.newaxis], sgrid)
     # Make H matrix as in (Twomey 1963)
     if gamma != 0:
         Hmat = makeH(num)
@@ -63,8 +62,7 @@ def solve(
     # find the gvalues (/num) by solving the system of equations
     ggrid = numpy.linalg.solve(AAgH, ksqur.T @ f(sgrid))
     # combine the s grid and the g grid
-    return numpy.array([ygrid, ggrid])
+    return numpy.array([sgrid, (ggrid * num / (b - a))])
 
 
 # %%
-
