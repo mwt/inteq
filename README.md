@@ -1,6 +1,6 @@
 # Solve Volterra and Fredholm integral equations
 
-This package estimates Volterra and Fredholm integral equations.
+This Python package estimates Volterra and Fredholm integral equations using known techniques.
 
 ## Volterra
 
