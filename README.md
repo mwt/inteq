@@ -10,7 +10,9 @@ This package provides the function `SolveVolterra` which approximates the soluti
 
 ![f(s) = \int_a^s K(s,y) g(y) dy](https://raw.githubusercontent.com/mwt/inteq/main/assets/volterra-equation.svg)
 
-using the method in [Betto and Thomas (2021)](https://mattwthomas.com/papers/asymmetric-all-pay-contests-with-spillovers/).
+using the method in [Betto and Thomas (2021)](https://mattwthomas.com/papers/asymmetric-all-pay-contests-with-spillovers/). 
+
+See the "Trapezoid and Midpoint Rules" section for a discussion of these two rules.
 
 ### Parameters
 
@@ -25,6 +27,8 @@ b : float
     Upper bound of the estimate, defaults to 1.
 num : int
     Number of estimation points between zero and `b`.
+method : string
+    Use either the 'midpoint' (default) or 'trapezoid' rule.
 ```
 
 ### Returns
@@ -63,3 +67,15 @@ num : int
 grid : 2-D array
     Input values are in the first row and output values are in the second row.
 ```
+
+# Trapezoid and Midpoint Rules
+
+Volterra integral equations are typically solved using the midpoint rule. However, the trapezoid rule often converges faster. See below an example of the trapezoid rule performing well with just six grid points.
+
+![example of trapezoid rule converging faster](https://raw.githubusercontent.com/mwt/inteq/main/assets/trap-vs-mid1.svg)
+
+Thus, the trapezoid rule typically performs better. However, the trapezoid rule is less stable than the midpoint rule. An example where this this instability is an issue is provided below.
+
+![example of trapezoid rule having issues](https://raw.githubusercontent.com/mwt/inteq/main/assets/trap-vs-mid2.svg)
+
+This can be remedied by smoothing the function.

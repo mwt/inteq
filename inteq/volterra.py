@@ -4,6 +4,8 @@ import typing
 import numpy
 import scipy.linalg
 
+from .helpers import makeH
+
 #%%
 
 
@@ -13,6 +15,7 @@ def solve(
     a: float = 0.0,
     b: float = 1.0,
     num: int = 1000,
+    method: str = "midpoint",
 ) -> numpy.ndarray:
     """
     Approximate the solution, g(x), to the Volterra Integral Equation of the first kind:
@@ -35,6 +38,8 @@ def solve(
         Upper bound of the estimate, defaults to 1.
     num : int
         Number of estimation points between zero and `b`.
+    method : string
+        Use either the 'midpoint' (default) or 'trapezoid' rule.
 
     Returns
     -------
@@ -47,6 +52,15 @@ def solve(
     sgrid = numpy.linspace(a + (b - a) / num, b, num)
     # create a lower triangular matrix of kernel values
     ktril = numpy.tril(k(sgrid[:, numpy.newaxis], sgrid))
+    if method is "midpoint":
+        pass
+    elif method is "trapezoid":
+        # apply trapezoid rule by halving the endpoints
+        numpy.fill_diagonal(ktril, numpy.diag(ktril) / 2)
+        # remember that 0,0 was already halved in the diagonal
+        ktril[:, 0] = ktril[:, 0] + k(sgrid, 0) / 2
+    else:
+        raise Exception("method must be one of 'midpoint', 'trapezoid'")
     # find the gvalues (/num) by solving the system of equations
     ggrid = scipy.linalg.solve_triangular(
         ktril, f(sgrid), lower=True, check_finite=False
@@ -56,4 +70,3 @@ def solve(
 
 
 # %%
-
