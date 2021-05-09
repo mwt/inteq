@@ -20,9 +20,8 @@ def solve(
     """
     Approximate the solution, g(x), to the Volterra Integral Equation of the first kind:
     
-    $$
-    f(s) = \\int_a^s K(s,y) g(y) dy
-    $$
+    .. math::
+        f(s) = \\int_a^s K(s,y) g(y) dy
 
     using the method in Betto and Thomas (2021).
 

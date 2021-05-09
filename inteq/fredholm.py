@@ -19,9 +19,8 @@ def solve(
     """
     Approximate the solution, g(x), to the Fredholm Integral Equation of the first kind:
     
-    $$
-    f(s) = \\int_0^b K(s,y) g(y) dy
-    $$
+    .. math::
+        f(s) = \\int_0^b K(s,y) g(y) dy
 
     using the method described in Twomey (1963). It will return a smooth curve that is an approximate solution. However, it may not be a good approximate to the true solution.
 
