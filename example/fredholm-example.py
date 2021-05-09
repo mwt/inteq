@@ -6,13 +6,13 @@ import matplotlib.pyplot as plt
 
 # define kernel
 def k(s, t):
-    return 1 + np.cos(np.pi * (t - s) / 3)
+    return (np.abs(t - s) <= 3) * (1 + np.cos(np.pi * (t - s) / 3))
 
 
 def f(s):
-    sa = np.abs(s)
-    p3 = -np.pi / 3
-    return (6 + sa) * (1 + 0.5 * np.cos(s * p3)) - (9 / (2 * np.pi)) * np.sin(sa * p3)
+    sp = np.abs(s)
+    sp3 = sp * np.pi / 3
+    return ((6 - sp) * (2 + np.cos(sp3)) + (9 / np.pi) * np.sin(sp3)) / 2
 
 
 # true value
@@ -20,7 +20,7 @@ def trueg(s):
     return k(0, s)
 
 
-s, g = SolveFredholm(k, f, a=-3, b=3, num=100, smin=-6, smax=6, snum=1000, gamma=5e-6)
+s, g = SolveFredholm(k, f, a=-3, b=3, num=1000, smin=-6, smax=6)
 
 # plot functions
 figure = plt.figure()
