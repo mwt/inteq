@@ -14,6 +14,7 @@ def solve(
     b: float = 1.0,
     gamma: float = 1e-3,
     num: int = 40,
+    **kwargs,
 ) -> numpy.ndarray:
     """
     Approximate the solution, g(x), to the Fredholm Integral Equation of the first kind:
@@ -36,6 +37,12 @@ def solve(
         Upper bound of the of the Fredholm definite integral, defaults to 1.
     num : int
         Number of estimation points between zero and `b`.
+    smin : float
+        Optional. Lower bound of enforcement values for s.
+    smax : float
+        Optional. Upper bound of enforcement values for s.
+    snum : int
+        Optional. Number of enforcement points for s.
 
     Returns
     -------
@@ -47,12 +54,27 @@ def solve(
     # need num to be odd to apply Simpson's rule
     if (num % 2) == 0:
         num += 1
+    # set defaults for s params
+    if "smin" in kwargs.keys():
+        smin = kwargs["smin"]
+    else:
+        smin = a
+    if "smax" in kwargs.keys():
+        smax = kwargs["smax"]
+    else:
+        smax = b
+    if "snum" in kwargs.keys():
+        snum = kwargs["snum"]
+    else:
+        snum = 2 * num
     # get grid for s
-    sgrid = numpy.linspace(a, b, num)
+    sgrid = numpy.linspace(smin, smax, snum)
+    # get grid for y
+    ygrid = numpy.linspace(a, b, num)
     # get quadrature weights
     weights = simpson(num)
     # create the quadrature matrix
-    ksqur = weights * k(sgrid[:, numpy.newaxis], sgrid)
+    ksqur = weights * k(sgrid[:, numpy.newaxis], ygrid)
     # Make H matrix as in (Twomey 1963)
     if gamma != 0:
         Hmat = makeH(num)
@@ -62,7 +84,7 @@ def solve(
     # find the gvalues (/num) by solving the system of equations
     ggrid = numpy.linalg.solve(AAgH, ksqur.T @ f(sgrid))
     # combine the s grid and the g grid
-    return numpy.array([sgrid, (ggrid * num / (b - a))])
+    return numpy.array([ygrid, (ggrid * num / (b - a))])
 
 
 # %%

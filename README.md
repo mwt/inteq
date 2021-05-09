@@ -61,6 +61,12 @@ b : float
     Upper bound of the of the Fredholm definite integral, defaults to 1.
 num : int
     Number of estimation points between zero and `b`.
+smin : float
+    Optional. Lower bound of enforcement values for s.
+smax : float
+    Optional. Upper bound of enforcement values for s.
+snum : int
+    Optional. Number of enforcement points for s.
 ```
 
 ### Returns

@@ -20,7 +20,7 @@ def trueg(s):
     return k(0, s)
 
 
-s, g = SolveFredholm(k, f, a=-3, b=3, num=1000, gamma=1)
+s, g = SolveFredholm(k, f, a=-3, b=3, num=100, smin=-6, smax=6, snum=1000, gamma=5e-6)
 
 # plot functions
 figure = plt.figure()
