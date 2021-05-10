@@ -35,7 +35,7 @@ this this instability is an issue is provided below.
 |example of trapezoid rule having issues|
 
 This can be remedied by smoothing the function. For example, with
-``inteq.helpers.smooth()``.
+:func:`inteq.helpers.smooth`.
 
 
 Second Kind
