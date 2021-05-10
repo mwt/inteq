@@ -5,7 +5,7 @@ Volterra Integral Equations
 First Kind
 ----------
 
-This package provides the function :func:`SolveVolterra` which approximates the solution to the Volterra Integral Equation of the first kind using the method in `Betto and Thomas (2021)`_. 
+This package provides the function :func:`inteq.SolveVolterra` which approximates the solution to the Volterra Integral Equation of the first kind using the method in `Betto and Thomas (2021)`_. 
 
 .. autofunction:: inteq.SolveVolterra
 

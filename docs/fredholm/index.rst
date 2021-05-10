@@ -4,7 +4,7 @@ Fredholm Integral Equations
 First Kind
 ----------
 
-This package provides the function :func:`SolveFredholm` which approximates the solution, g(x), to the Fredholm Integral Equation of the first kind using the method described in `Twomey (1963)`_. It will return a smooth curve that is an approximate solution. However, it may not be a good approximate to the true solution.
+This package provides the function :func:`inteq.SolveFredholm` which approximates the solution, g(x), to the Fredholm Integral Equation of the first kind using the method described in `Twomey (1963)`_. It will return a smooth curve that is an approximate solution. However, it may not be a good approximate to the true solution.
 
 .. autofunction:: inteq.SolveFredholm
 
