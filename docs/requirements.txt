@@ -2,3 +2,5 @@ sphinx==3.4.3
 sphinx_rtd_theme==0.5.1
 numpydoc==1.1.0
 readthedocs-sphinx-search==0.1.0rc3
+numpy>=1.7.0
+scipy
