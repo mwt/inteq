@@ -1,3 +1,5 @@
+.. role:: func(code)
+
 Solve Volterra and Fredholm integral equations
 ==============================================
 
