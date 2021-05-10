@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'inteq'
+project = 'IntEQ'
 copyright = '2021, Matthew Wildrick Thomas'
 author = 'Matthew Wildrick Thomas'
 

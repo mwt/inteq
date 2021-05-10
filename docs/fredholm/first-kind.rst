@@ -5,4 +5,14 @@ This package provides the function :code:`SolveFredholm` which approximates the 
 
 .. autofunction:: inteq.SolveFredholm
 
+
+Example
+-------
+
+|example of first kind fie|
+
+.. literalinclude:: ../../example/fredholm-example.py
+    :language: python
+
 .. _`Twomey (1963)`: https://doi.org/10.1145/321150.321157
+.. |example of first kind fie| image:: fredholm-example.svg
