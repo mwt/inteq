@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from inteq import SolveVolterra
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,13 +7,12 @@ def k(s, t):
     return np.cos(s - t)
 
 
-# true value
+# define true solution
 def trueg(s):
     return (2 + s ** 2) / 2
 
 
-# looks pretty good with just 8 grid points
-# but we'll use 25
+# look decent with just 8 grid points but we'll use 25
 s, g = SolveVolterra(k, num=25, method="trapezoid")
 
 # plot functions
@@ -32,5 +29,4 @@ plt.ylabel("g(s)")
 figure.set_dpi(100)
 figure.set_size_inches(8, 5)
 
-figure.savefig("..\\assets\\volterra-example.svg", bbox_inches="tight")
-
+figure.savefig("..\\docs\\volterra\\volterra-example.svg", bbox_inches="tight")

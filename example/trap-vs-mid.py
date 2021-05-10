@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #%%
 from inteq import SolveVolterra
 import numpy as np
@@ -34,7 +33,7 @@ plt.ylabel("g(s)")
 figure.set_dpi(100)
 figure.set_size_inches(8, 5)
 
-figure.savefig("..\\assets\\trap-vs-mid1.svg", bbox_inches="tight")
+figure.savefig("..\\docs\\volterra\\trap-vs-mid1.svg", bbox_inches="tight")
 
 #%% trapezoid does poorly
 
@@ -60,7 +59,7 @@ plt.ylabel("g(s)")
 figure.set_dpi(100)
 figure.set_size_inches(8, 5)
 
-figure.savefig("..\\assets\\trap-vs-mid2.svg", bbox_inches="tight")
+figure.savefig("..\\docs\\volterra\\trap-vs-mid2.svg", bbox_inches="tight")
 
 
 # %%
