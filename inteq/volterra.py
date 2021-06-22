@@ -118,7 +118,9 @@ def solve2(
     if method is "midpoint":
         pass
     elif method is "trapezoid":
-        # apply trapezoid rule by halving the endpoints
+        # apply trapezoid rule by halving the left endpoints
+        ktril[:, 0] = ktril[:, 0] / 2
+        # apply trapezoid rule by halving the right endpoints (0,0 gets fixed later)
         numpy.fill_diagonal(ktril, numpy.diag(ktril) / 2)
     else:
         raise Exception("method must be one of 'midpoint', 'trapezoid'")
