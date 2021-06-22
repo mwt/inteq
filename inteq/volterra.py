@@ -110,7 +110,7 @@ def solve2(
     if not isinstance(num, int):
         num = int(num)
     # make a grid of `num` points from (eps > 0) to `b`
-    sgrid = numpy.linspace(0, b, num)
+    sgrid = numpy.linspace(a, b, num)
     # create a lower triangular matrix of kernel values
     ktril = numpy.tril(k(sgrid[:, numpy.newaxis], sgrid))
     # create matrix to invert
@@ -120,10 +120,10 @@ def solve2(
     elif method is "trapezoid":
         # apply trapezoid rule by halving the endpoints
         numpy.fill_diagonal(ktril, numpy.diag(ktril) / 2)
-        # remember that 0,0 was already halved in the diagonal
-        ktril[:, 0] = ktril[:, 0] + k(sgrid, 0) / 2
     else:
         raise Exception("method must be one of 'midpoint', 'trapezoid'")
+    # first entry is exactly f(a)
+    ktril[0,0] = 1
     # find the gvalues (/num) by solving the system of equations
     ggrid = scipy.linalg.solve_triangular(
         ktril, f(sgrid), lower=True, check_finite=False
