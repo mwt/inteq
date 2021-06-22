@@ -124,8 +124,8 @@ def solve2(
         numpy.fill_diagonal(ktril, numpy.diag(ktril) / 2)
     else:
         raise Exception("method must be one of 'midpoint', 'trapezoid'")
-    # first entry is exactly f(a)
-    ktril[0,0] = 1
+    # first entry is exactly g(a) = f(a)
+    ktril[0,0] = num / (b - a)
     # find the gvalues (/num) by solving the system of equations
     ggrid = scipy.linalg.solve_triangular(
         ktril, f(sgrid), lower=True, check_finite=False
