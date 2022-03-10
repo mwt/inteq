@@ -1,12 +1,8 @@
-# -*- coding: utf-8 -*-
-
 import typing
 import numpy
 import scipy.linalg
 
 from .helpers import makeH
-
-#%%
 
 
 def solve(
@@ -60,15 +56,20 @@ def solve(
         ktril[:, 0] = ktril[:, 0] + k(sgrid, 0) / 2
     else:
         raise Exception("method must be one of 'midpoint', 'trapezoid'")
+
     # find the gvalues (/num) by solving the system of equations
-    ggrid = scipy.linalg.solve_triangular(
-        ktril, f(sgrid), lower=True, check_finite=False
-    )
+    try:
+        ggrid = scipy.linalg.solve_triangular(
+            ktril, f(sgrid), lower=True, check_finite=False
+        )
+    except scipy.linalg.LinAlgError:
+        ktril += 0.0000001 * numpy.eye(len(ktril))
+        ggrid = scipy.linalg.solve_triangular(
+            ktril, f(sgrid), lower=True, check_finite=False
+        )
+
     # combine the s grid and the g grid
     return numpy.array([sgrid, (ggrid * num / (b - a))])
-
-
-# %%
 
 
 def solve2(
