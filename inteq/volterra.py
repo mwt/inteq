@@ -1,9 +1,11 @@
+"""
+This module provides functions for solving Volterra integral equations of the first and second kind.
+"""
+
 import typing
 
 import numpy
 import scipy.linalg
-
-from .helpers import makeH
 
 
 def solve(

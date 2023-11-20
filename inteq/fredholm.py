@@ -1,3 +1,7 @@
+"""
+This module provides functions for solving Fredholm integral equations of the first and second kind.
+"""
+
 import typing
 
 import numpy

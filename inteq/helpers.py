@@ -1,3 +1,8 @@
+"""
+This module provides functions are used by the main integral equation solvers.
+However, they can also be used by the user for other purposes such as quadrature.
+"""
+
 import numpy
 
 
