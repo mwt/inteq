@@ -1,12 +1,9 @@
-# -*- coding: utf-8 -*-
-
 import typing
+
 import numpy
 import scipy.linalg
 
 from .helpers import makeH
-
-#%%
 
 
 def solve(
@@ -68,9 +65,6 @@ def solve(
     return numpy.array([sgrid, (ggrid * num / (b - a))])
 
 
-# %%
-
-
 def solve2(
     k: typing.Callable[[numpy.ndarray, numpy.ndarray], numpy.ndarray],
     f: typing.Callable[[numpy.ndarray], numpy.ndarray] = lambda x: x,
@@ -125,7 +119,7 @@ def solve2(
     else:
         raise Exception("method must be one of 'midpoint', 'trapezoid'")
     # first entry is exactly g(a) = f(a)
-    ktril[0,0] = num / (b - a)
+    ktril[0, 0] = num / (b - a)
     # find the gvalues (/num) by solving the system of equations
     ggrid = scipy.linalg.solve_triangular(
         ktril, f(sgrid), lower=True, check_finite=False

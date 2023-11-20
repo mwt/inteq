@@ -1,6 +1,8 @@
-from inteq import SolveVolterra
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+
+from inteq import SolveVolterra
+
 
 # define kernel
 def k(s, t):
@@ -9,7 +11,7 @@ def k(s, t):
 
 # define true solution
 def trueg(s):
-    return (2 + s ** 2) / 2
+    return (2 + s**2) / 2
 
 
 # look decent with just 8 grid points but we'll use 25

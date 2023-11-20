@@ -1,9 +1,10 @@
-#%%
-from inteq import SolveVolterra
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-#%% trapezoid does well
+from inteq import SolveVolterra
+
+## trapezoid does well
+
 
 # define kernel
 def k(s, t):
@@ -12,7 +13,7 @@ def k(s, t):
 
 # true value
 def trueg(s):
-    return (2 + s ** 2) / 2
+    return (2 + s**2) / 2
 
 
 st, gt = SolveVolterra(k, method="trapezoid", num=6)
@@ -35,7 +36,8 @@ figure.set_size_inches(8, 5)
 
 figure.savefig("..\\docs\\volterra\\trap-vs-mid1.svg", bbox_inches="tight")
 
-#%% trapezoid does poorly
+## trapezoid does poorly
+
 
 # define kernel
 def k(s, t):
@@ -60,6 +62,3 @@ figure.set_dpi(100)
 figure.set_size_inches(8, 5)
 
 figure.savefig("..\\docs\\volterra\\trap-vs-mid2.svg", bbox_inches="tight")
-
-
-# %%

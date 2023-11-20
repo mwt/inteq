@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
-
 import typing
-import numpy
-from .helpers import makeH, simpson
 
-#%%
+import numpy
+
+from .helpers import makeH, simpson
 
 
 def solve(
@@ -18,7 +16,7 @@ def solve(
 ) -> numpy.ndarray:
     """
     Approximate the solution, g(x), to the Fredholm Integral Equation of the first kind:
-    
+
     .. math::
         f(s) = \\int_a^b K(s,y) g(y) dy
 
@@ -28,7 +26,7 @@ def solve(
     ----------
     k : function
         The kernel function that takes two arguments.
-    f : function 
+    f : function
         The left hand side (free) function that takes one argument.
     a : float
         Lower bound of the of the Fredholm definite integral, defaults to -1.
@@ -84,6 +82,3 @@ def solve(
     ggrid = numpy.linalg.solve(AAgH, ksqur.T @ f(sgrid))
     # combine the s grid and the g grid
     return numpy.array([ygrid, (ggrid * num / (b - a))])
-
-
-# %%

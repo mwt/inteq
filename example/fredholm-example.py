@@ -1,6 +1,8 @@
-from inteq import SolveFredholm
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+
+from inteq import SolveFredholm
+
 
 # define kernel
 def k(s, t):
