@@ -1,3 +1,5 @@
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -34,7 +36,9 @@ plt.ylabel("g(s)")
 figure.set_dpi(100)
 figure.set_size_inches(8, 5)
 
-figure.savefig("..\\docs\\volterra\\trap-vs-mid1.svg", bbox_inches="tight")
+save_path = os.path.join(os.path.dirname(__file__),
+                            "..", "docs", "volterra", "trap-vs-mid1.svg")
+figure.savefig(save_path, bbox_inches="tight")
 
 ## trapezoid does poorly
 
@@ -61,4 +65,6 @@ plt.ylabel("g(s)")
 figure.set_dpi(100)
 figure.set_size_inches(8, 5)
 
-figure.savefig("..\\docs\\volterra\\trap-vs-mid2.svg", bbox_inches="tight")
+save_path = os.path.join(os.path.dirname(__file__),
+                            "..", "docs", "volterra", "trap-vs-mid2.svg")
+figure.savefig(save_path, bbox_inches="tight")

@@ -1,3 +1,5 @@
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -38,4 +40,6 @@ plt.ylabel("g(s)")
 figure.set_dpi(100)
 figure.set_size_inches(8, 5)
 
-figure.savefig("..\\docs\\fredholm\\fredholm-example.svg", bbox_inches="tight")
+save_path = os.path.join(os.path.dirname(__file__),
+                            "..", "docs", "fredholm", "fredholm-example.svg")
+figure.savefig(save_path, bbox_inches="tight")
