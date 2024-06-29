@@ -18,6 +18,11 @@ Example
 .. literalinclude:: ../../example/volterra-example.py
     :language: python
 
+|example of second kind vie|
+
+.. literalinclude:: ../../example/volterra-example2.py
+    :language: python
+
 
 Trapezoid vs Midpoint Rule
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -41,10 +46,13 @@ This can be remedied by smoothing the function. For example, with
 Second Kind
 -----------
 
-Implementation forthcoming.
+The function :func:`inteq.SolveVolterra2` approximates the solution to the Volterra Integral Equation of the second kind using either the midpoint or trapezoid rule.
+
+.. autofunction:: inteq.SolveVolterra
 
 
 .. _`Betto and Thomas (2021)`: https://mattwthomas.com/papers/asymmetric-all-pay-contests-with-spillovers/
 .. |example of first kind vie| image:: volterra-example.svg
+.. |example of second kind vie| image:: volterra-example2.svg
 .. |example of trapezoid rule converging faster| image:: trap-vs-mid1.svg
 .. |example of trapezoid rule having issues| image:: trap-vs-mid2.svg
