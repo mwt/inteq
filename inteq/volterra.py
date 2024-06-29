@@ -6,6 +6,7 @@ import typing
 
 import numpy
 import scipy.linalg
+from .quad import simpson_quad, gregory_weight_matrix
 
 
 def solve(
@@ -74,6 +75,7 @@ def solve2(
     b: float = 1.0,
     num: int = 1000,
     method: str = "midpoint",
+    greg_order: int = 3,
 ) -> numpy.ndarray:
     """
     Approximate the solution, g(x), to the Volterra Integral Equation of the second kind:
@@ -96,7 +98,9 @@ def solve2(
     num : int
         Number of estimation points between zero and `b`.
     method : string
-        Use either the 'midpoint' (default) or 'trapezoid' rule.
+        Quadrature method: 'midpoint' (default), 'trapezoid', 'simpson', or 'gregory'.
+    greg_order: int
+        Order of the Gregory quadrature rule. Used only if `method` is 'gregory'.
 
     Returns
     -------
@@ -109,22 +113,36 @@ def solve2(
     sgrid = numpy.linspace(a, b, num)
     h = (b - a) / (num - 1)
     # create a lower triangular matrix of kernel values
-    ktril = numpy.tril(k(sgrid, sgrid[:, numpy.newaxis]))
+    kmat = k(sgrid, sgrid[:, numpy.newaxis])
+    fgrid = f(sgrid)
 
     if method == "midpoint":
-        pass
+        kmat = numpy.tril(kmat)
+        # first entry is exactly g(a) = f(a)
+        kmat[0, 0] = 0
+        ggrid = scipy.linalg.solve_triangular(
+            numpy.eye(num) - h * kmat, fgrid, lower=True, check_finite=False
+        )
     elif method == "trapezoid":
         # apply trapezoid rule by halving the left endpoints
-        ktril[:, 0] *= 1/2
+        kmat = numpy.tril(kmat)
+        kmat[:, 0] *= 1/2
         # apply trapezoid rule by halving the right endpoints (0,0 gets fixed later)
-        numpy.fill_diagonal(ktril, numpy.diag(ktril) / 2)
+        numpy.fill_diagonal(kmat, numpy.diag(kmat) / 2)
+        kmat[0, 0] = 0
+        ggrid = scipy.linalg.solve_triangular(
+            numpy.eye(num) - h * kmat, fgrid, lower=True, check_finite=False
+        )
+    elif method == 'simpson':
+        kmat *= simpson_quad(num - 1)
+        ggrid = scipy.linalg.solve(-h*kmat+numpy.eye(num), fgrid)
+    elif method == 'gregory':
+        kmat *= gregory_weight_matrix(greg_order, num - 1)
+        ggrid = scipy.linalg.solve(-h*kmat+numpy.eye(num), fgrid)
     else:
-        raise Exception("method must be one of 'midpoint', 'trapezoid'")
-    # first entry is exactly g(a) = f(a)
-    ktril[0, 0] = 0
+        msg = f"Invalid method: {method}."
+        raise ValueError(msg)
+
     # find the gvalues (/num) by solving the system of equations
-    ggrid = scipy.linalg.solve_triangular(
-        numpy.eye(num) - h * ktril, f(sgrid), lower=True, check_finite=False
-    )
     # combine the s grid and the g grid
     return numpy.array([sgrid, ggrid])
