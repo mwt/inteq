@@ -50,9 +50,9 @@ def solve(
     sgrid = numpy.linspace(a + (b - a) / num, b, num)
     # create a lower triangular matrix of kernel values
     ktril = numpy.tril(k(sgrid[:, numpy.newaxis], sgrid))
-    if method is "midpoint":
+    if method == "midpoint":
         pass
-    elif method is "trapezoid":
+    elif method == "trapezoid":
         # apply trapezoid rule by halving the endpoints
         numpy.fill_diagonal(ktril, numpy.diag(ktril) / 2)
         # remember that 0,0 was already halved in the diagonal
@@ -107,24 +107,24 @@ def solve2(
         num = int(num)
     # make a grid of `num` points from (eps > 0) to `b`
     sgrid = numpy.linspace(a, b, num)
+    h = (b - a) / (num - 1)
     # create a lower triangular matrix of kernel values
-    ktril = numpy.tril(k(sgrid[:, numpy.newaxis], sgrid))
-    # create matrix to invert
-    ktril = numpy.diag(num) - ktril
-    if method is "midpoint":
+    ktril = numpy.tril(k(sgrid, sgrid[:, numpy.newaxis]))
+
+    if method == "midpoint":
         pass
-    elif method is "trapezoid":
+    elif method == "trapezoid":
         # apply trapezoid rule by halving the left endpoints
-        ktril[:, 0] = ktril[:, 0] / 2
+        ktril[:, 0] *= 1/2
         # apply trapezoid rule by halving the right endpoints (0,0 gets fixed later)
         numpy.fill_diagonal(ktril, numpy.diag(ktril) / 2)
     else:
         raise Exception("method must be one of 'midpoint', 'trapezoid'")
     # first entry is exactly g(a) = f(a)
-    ktril[0, 0] = num / (b - a)
+    ktril[0, 0] = 0
     # find the gvalues (/num) by solving the system of equations
     ggrid = scipy.linalg.solve_triangular(
-        ktril, f(sgrid), lower=True, check_finite=False
+        numpy.eye(num) - h * ktril, f(sgrid), lower=True, check_finite=False
     )
     # combine the s grid and the g grid
-    return numpy.array([sgrid, (ggrid * num / (b - a))])
+    return numpy.array([sgrid, ggrid])
