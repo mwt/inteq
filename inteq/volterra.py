@@ -56,7 +56,7 @@ def solve(
         # apply trapezoid rule by halving the endpoints
         numpy.fill_diagonal(ktril, numpy.diag(ktril) / 2)
         # remember that 0,0 was already halved in the diagonal
-        ktril[:, 0] = ktril[:, 0] + k(sgrid, 0) / 2
+        ktril[:, 0] = ktril[:, 0] + k(sgrid, a) / 2
     else:
         raise Exception("method must be one of 'midpoint', 'trapezoid'")
     # find the gvalues (/num) by solving the system of equations
